@@ -83,3 +83,27 @@ Todo
 * Not particularily optimzed for startup time.
 * Better docs
 
+vigour备忘
+---
+* 构造镜像  
+```bash
+docker build -t vigour/kafka:0.10.1.0  .  
+```
+* 执行  
+```bash
+docker run -itd  --name kafka -p 2181:2181 -p 9092:9092 --env ADVERTISED_HOST='localhost' --env ADVERTISED_PORT=9092 vigour/kafka:0.10.1.0
+```
+* 从主机进入docker  
+```bash
+ docker exec -it kafka bash 
+```
+* 在容器中创建topic  
+```
+ cd /opt/kafak*/  
+ ./bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic foo1 --partitions 1 --replication-factor 1 
+```
+* 在容器中可以执行的其他命令，参考kafka手册，比如:
+```
+  kafka-console-consumer.sh
+  kafka-console-producer.sh
+```
